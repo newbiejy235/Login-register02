@@ -18,10 +18,6 @@ app.use(express.json());
 
 
 
-app.get("/", (req, res) => {
-  res.send("hello");
-});
-
 app.post("/recovery", async (req, res) => {
   const { email } = req.body;
 
