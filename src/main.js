@@ -2,6 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const PORT = process.env.PORT || 4003;
 const middleWare = require("./middleware/cors");
+// const kahdhad = require("../publick")
 const path = require("path");
 
 const {
@@ -12,7 +13,7 @@ const {
 } = require("./fireBase/fireBase");
 
 const app = express();
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "../../")));
 app.use(middleWare);
 app.use(express.json());
 // Menghapus baris lama: app.use(express.static("public"));
