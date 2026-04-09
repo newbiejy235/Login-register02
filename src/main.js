@@ -15,7 +15,20 @@ const app = express();
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(middleWare);
 app.use(express.json());
-app.use(express.static("public"));
+// Menghapus baris lama: app.use(express.static("public"));
+// Dan ganti dengan ini:
+app.use("/asset", express.static(path.join(__dirname, "../asset")));
+app.use("/styles", express.static(path.join(__dirname, "../styles")));
+
+// Mengarahkan halaman utama ke index.html
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../index.html"));
+});
+
+// Jika kamu punya halaman recovery.html
+app.get("/recovery-page", (req, res) => {
+  res.sendFile(path.join(__dirname, "../recov.html"));
+});
 
 app.post("/recovery", async (req, res) => {
   const { email } = req.body;
@@ -128,6 +141,6 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0",  () => {
   console.log(`WEB BERJALAN PADA PORT`, PORT);
 });
