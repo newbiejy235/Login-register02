@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./styles/output.css" rel="stylesheet" />
+  </head>
+  <body class="flex min-h-screen items-center justify-center bg-gray-100">
+    <div
+      id="toast-container"
+      class="fixed top-5 right-5 z-9999 flex flex-col gap-3 w-full max-w-[calc(100%-40px)] sm:max-w-md"
+    ></div>
+    <div
+      class="bg-white rounded-2xl shadow-2xl p-10 w-80 md:w-96 flex flex-col gap-5"
+    >
+      <!-- STEP 1: Input Email -->
+      <div id="stepEmail">
+        <h2 class="text-2xl font-bold text-[#133B6C] mb-2">
+          Recovery Password
+        </h2>
+        <p class="text-gray-500 text-sm mb-5">
+          Masukkan email kamu, kami akan kirimkan link untuk reset password.
+        </p>
+
+        <input
+          id="recovEmail"
+          type="email"
+          placeholder="Email (@gmail.com)"
+          class="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#3F5F86]"
+        />
+        <p id="emailError" class="text-red-500 text-xs mt-1 hidden"></p>
+
+        <button
+          onclick="sendReset()"
+          id="btnSend"
+          class="mt-5 w-full bg-[#3F5F86] text-white rounded-xl py-2 hover:bg-[#133B6C] transition cursor-pointer"
+        >
+          Kirim Link Reset
+        </button>
+
+        <a
+          href="index.html"
+          class="block text-center text-blue-600 text-xs underline mt-4"
+          >Kembali ke Login</a
+        >
+      </div>
+
+      <!-- STEP 2: Sukses -->
+      <div id="stepSuccess" class="hidden text-center">
+        <div class="text-5xl mb-4">📧</div>
+        <h2 class="text-2xl font-bold text-[#133B6C] mb-2">Email Terkirim!</h2>
+        <p class="text-gray-500 text-sm mb-5">
+          Link reset password sudah dikirim ke <br />
+          <strong id="sentTo"></strong>
+        </p>
+        <p class="text-gray-400 text-xs mb-5">
+          Cek folder spam jika tidak ada di inbox.
+        </p>
+        <a
+          href="index.html"
+          class="w-full block bg-[#3F5F86] text-white rounded-xl py-2 text-center hover:bg-[#133B6C] transition"
+        >
+          Kembali ke Login
+        </a>
+        <button
+          onclick="backToEmail()"
+          class="mt-3 w-full text-[#3F5F86] text-sm underline cursor-pointer"
+        >
+          Kirim ulang ke email lain
+        </button>
+      </div>
+    </div>
+    <script src="./src/rout/recov.js"></script>
+  </body>
+</html>
