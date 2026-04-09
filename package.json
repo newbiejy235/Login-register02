@@ -14,6 +14,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node ./src/main.js",
     "dev": "nodemon ./src/main.js",
     "des": "npx @tailwindcss/cli -i ./styles/input.css -o ./styles/output.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
