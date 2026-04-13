@@ -8,13 +8,16 @@ async function getDataIn() {
   }
 
   try {
-    const response = await fetch("http://localhost:4000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      "https://login-register02-production-85a9.up.railway.app/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
       },
-      body: JSON.stringify({ email, password }),
-    });
+    );
 
     const data = await response.json();
 

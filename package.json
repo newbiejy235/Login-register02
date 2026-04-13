@@ -16,7 +16,7 @@
   "scripts": {
     "start": "node ./src/main.js",
     "dev": "nodemon ./src/main.js",
-    "des": "npx @tailwindcss/cli -i ./styles/input.css -o ./styles/output.css --watch",
+    "des": "npx @tailwindcss/cli -i ./publick/styles/input.css -o ./publick/styles/output.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

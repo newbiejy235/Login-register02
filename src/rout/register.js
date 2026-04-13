@@ -13,13 +13,16 @@ async function getDataUp() {
   }
 
   try {
-    const response = await fetch("http://localhost:4000/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      "https://login-register02-production-85a9.up.railway.app/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
       },
-      body: JSON.stringify({ email, password }),
-    });
+    );
 
     const data = await response.json();
 
@@ -27,7 +30,10 @@ async function getDataUp() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("uid", data.user.uid);
       localStorage.setItem("email", data.user.email);
-      showToast("Register berhasil! Selamat datang " + data.user.email, "success")
+      showToast(
+        "Register berhasil! Selamat datang " + data.user.email,
+        "success",
+      );
       // window.location.href = "dashboard.html";
     } else {
       showToast(data.message, "error");

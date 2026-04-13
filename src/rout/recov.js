@@ -5,25 +5,28 @@ async function sendReset() {
   errorEl.classList.add("hidden");
 
   if (!email) {
-    showToast("Email wajib di isi", "info")
+    showToast("Email wajib di isi", "info");
     return;
   }
 
   if (!email.endsWith("@gmail.com")) {
-    showToast("Harus pake Email @gmail.com", "info")
+    showToast("Harus pake Email @gmail.com", "info");
     return;
   }
 
   btn.textContent = "Mengirim...";
-  showToast("Mengirim email 👍", "success")
+  showToast("Mengirim email 👍", "success");
   btn.disabled = true;
 
   try {
-    const response = await fetch("http://localhost:4000/recovery", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
+    const response = await fetch(
+      "https://login-register02-production-85a9.up.railway.app/recovery",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      },
+    );
 
     const data = await response.json();
 
@@ -36,7 +39,7 @@ async function sendReset() {
       errorEl.classList.remove("hidden");
     }
   } catch (error) {
-    showToast("Server error boss", "error")
+    showToast("Server error boss", "error");
   } finally {
     btn.textContent = "Kirim Link Reset";
     btn.disabled = false;
@@ -56,19 +59,34 @@ function showToast(message, type = "success") {
 
   // Konfigurasi warna berdasarkan tipe
   const config = {
-    success: { bg: "bg-emerald-50", border: "border-emerald-500", text: "text-emerald-800", icon: "✅" },
-    error: { bg: "bg-rose-50", border: "border-rose-500", text: "text-rose-800", icon: "❌" },
-    info: { bg: "bg-blue-50", border: "border-blue-500", text: "text-blue-800", icon: "ℹ️" }
+    success: {
+      bg: "bg-emerald-50",
+      border: "border-emerald-500",
+      text: "text-emerald-800",
+      icon: "✅",
+    },
+    error: {
+      bg: "bg-rose-50",
+      border: "border-rose-500",
+      text: "text-rose-800",
+      icon: "❌",
+    },
+    info: {
+      bg: "bg-blue-50",
+      border: "border-blue-500",
+      text: "text-blue-800",
+      icon: "ℹ️",
+    },
   };
 
   const style = config[type] || config.info;
 
   // Buat element toast
   const toast = document.createElement("div");
-  
+
   // Class Tailwind untuk styling & animasi awal (opacity 0 & geser ke kanan)
   toast.className = `flex items-center p-4 rounded-xl border-l-4 shadow-lg transition-all duration-500 ease-out opacity-0 translate-x-10 ${style.bg} ${style.border} ${style.text}`;
-  
+
   toast.innerHTML = `
     <span class="mr-3 text-lg">${style.icon}</span>
     <p class="text-sm font-medium leading-relaxed">${message}</p>
@@ -86,7 +104,7 @@ function showToast(message, type = "success") {
   setTimeout(() => {
     toast.classList.remove("opacity-100", "translate-x-0");
     toast.classList.add("opacity-0", "translate-x-10");
-    
+
     // Hapus dari DOM setelah animasi keluar selesai
     setTimeout(() => toast.remove(), 500);
   }, 3500);
